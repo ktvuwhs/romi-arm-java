@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 /** A subsystem that represents one of the components from the Romi
  * Arm Kit that has a Servo on it.  These Servos contain an extra,
- * green wire that reports the position of the Servo in volts.  The
+ * green wire that reports the position of the Servo in milivolts.  The
  * position in mV is at a near 1:1 correspondence with its pulse
  * value in miliseconds.
  * 
