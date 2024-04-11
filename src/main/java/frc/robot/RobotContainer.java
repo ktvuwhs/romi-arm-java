@@ -8,9 +8,15 @@ import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.RomiDrivetrain;
+import frc.robot.subsystems.SingleServoSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+
+import frc.robot.Constants;
+import frc.robot.Constants.GripperConstants;
+import frc.robot.Constants.LiftConstants;
+import frc.robot.Constants.PivotConstants;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -22,7 +28,10 @@ public class RobotContainer {
   final CommandXboxController m_controller = new CommandXboxController(0);
   // The robot's subsystems and commands are defined here...
   private final RomiDrivetrain m_romiDrivetrain = new RomiDrivetrain();
-  private final Arm m_arm = new Arm();
+  private final SingleServoSubsystem m_lift = new SingleServoSubsystem(LiftConstants.kPort, LiftConstants.kMinPulse, LiftConstants.kMaxPulse);
+  private final SingleServoSubsystem m_pivot = new SingleServoSubsystem(PivotConstants.kPort, PivotConstants.kMinPulse, PivotConstants.kMaxPulse);
+  private final SingleServoSubsystem m_gripper = new SingleServoSubsystem(GripperConstants.kPort, 0, 1);
+
 
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_romiDrivetrain);
 
@@ -44,8 +53,8 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    m_controller.a().whileTrue(m_arm.raiseCommand());
-    m_controller.b().whileTrue(m_arm.lowerCommand());
+    m_controller.a().whileTrue(m_lift.raiseCommand());
+    m_controller.b().whileTrue(m_lift.lowerCommand());
   }
 
   /**
