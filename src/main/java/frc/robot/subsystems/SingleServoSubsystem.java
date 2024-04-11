@@ -19,6 +19,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
  * If the green wire is not used, then the AnalogOutput object is
  * set to null.
  * 
+ * m_signal   The AnalogOutput object connected to the port that
+ *            the Servo's green wire is connected to on the Romi.
+ *            Used to return the position of the Servo.
  * kMinPulse  The minimum operating pulse value for the Servo based
  *            on the geometry of the Arm Kit.
  * kMaxPulse  The maximum operating pulse value for the Servo based
