@@ -4,18 +4,19 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-import static frc.robot.Constants.*;
+import static frc.robot.Constants.LiftConstants.*;
 
 public class Arm extends SubsystemBase {
   private final Servo m_servo;
   
   /** Creates a new Arm. */
   public Arm() {
-    m_servo = new Servo(kArmPort);
+    m_servo = new Servo(kPort);
   }
 
   @Override
@@ -24,10 +25,10 @@ public class Arm extends SubsystemBase {
   }
 
   public Command raiseCommand() {
-    return this.run(() -> m_servo.set(m_servo.get() + 0.01));
+    return this.run(() -> m_servo.set(MathUtil.clamp(m_servo.get() + 0.01, kMinPulse, kMaxPulse)));
   }
 
   public Command lowerCommand() {
-    return this.run(() -> m_servo.set(m_servo.get() - 0.01));
+    return this.run(() -> m_servo.set(MathUtil.clamp(m_servo.get() - 0.01, kMinPulse, kMaxPulse)));
   }
 }

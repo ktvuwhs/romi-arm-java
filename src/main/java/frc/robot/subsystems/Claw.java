@@ -4,18 +4,19 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-import static frc.robot.Constants.*;
+import static frc.robot.Constants.GripperConstants.*;
 
 public class Claw extends SubsystemBase {
   private final Servo m_servo;
   
   /** Creates a new Claw. */
   public Claw() {
-    m_servo = new Servo(kClawPort);
+    m_servo = new Servo(kPort);
   }
 
   @Override
@@ -24,10 +25,10 @@ public class Claw extends SubsystemBase {
   }
 
   public Command raiseCommand() {
-    return this.run(() -> m_servo.set(m_servo.get() + 0.01));
+    return this.run(() -> m_servo.set(MathUtil.clamp(m_servo.get() - 0.01, 0, 1)));
   }
 
   public Command lowerCommand() {
-    return this.run(() -> m_servo.set(m_servo.get() - 0.01));
+    return this.run(() -> m_servo.set(MathUtil.clamp(m_servo.get() - 0.01, 0, 1)));
   }
 }
